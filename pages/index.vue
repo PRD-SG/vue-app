@@ -1,7 +1,7 @@
 <template>
   <div align="center">
     <b-container fluid="md" class="bv-example-row">
-      <b-row class="justify-content-md-center" id="b-row">
+      <b-row align-h="center" id="b-row">
         <b-col col md="12"
           ><b-jumbotron bg-variant="primary" text-variant="white">
             <template #header>Vending Machine Problem</template>
@@ -10,27 +10,37 @@
         >
       </b-row>
 
-      <b-row id="b-row">
+      <b-row id="btn-sale">
         <b-col col md="12"
           ><b-button href="/sale" variant="danger"
             >กดเพื่อทำการซื้อ</b-button
           ></b-col
         >
       </b-row>
-
-      <b-row id="b-row">
-        <div v-for="pro in pro.data" :key="pro.data">
-          <div class="pro-info" v-if="pro.in_stock == true">
-            <b-col col lg="12">
-                <div class="product" align="center">
-                  <h4>ชื่อสินค้า : {{ pro.name }}</h4>
-                  <h4>ราคา : {{ pro.price }} บาท</h4>
-                  <img :src="pro.image" />
-              </div>
-            </b-col>
+      <h3>Product in stock</h3>
+      <div align="center">
+        <b-row align-h="center">
+          <div v-for="pro in pro.data" :key="pro.data">
+            <div v-if="pro.in_stock == true">
+              <b-col sm="12" align-self="start">
+                <b-card
+                  :title="pro.name"
+                  :img-src="pro.image"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="width: 15rem"
+                  class="mb-2"
+                  footer="Product in stock"
+                  img-height="200"
+                >
+                  <b-card-text>ราคา {{pro.price}} บาท</b-card-text>
+                </b-card>
+              </b-col>
+            </div>
           </div>
-        </div>
-      </b-row>
+        </b-row>
+      </div>
     </b-container>
   </div>
 </template>
@@ -50,24 +60,25 @@ export default {
 
 <style scoped>
 #b-row {
-  margin: 1%;
+  margin: 10px;
+}
+.btn {
+  margin-bottom: 10px;
 }
 
 .b-row {
   margin-top: 5%;
 }
 
-.product {
-  background-color: #FFEDDA;
-  border-radius: 10px;
-  padding: 15px;
-  margin-top: 5%;
-  height: 400px;
+.data-product {
+  width: 20rem;
+  height: auto;
+  border: 1px solid #4caf50;
+  border-radius: 50px 20px;
+  background-color: bisque;
 }
 
-img {
-  border-radius: 10px;
-  width: 100;
+h3 {
+  padding: 10px;
 }
-
 </style>
