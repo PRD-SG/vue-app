@@ -3,7 +3,7 @@ export default {
   mode: 'universal',
   target: 'server',
   head: {
-    title: 'app',
+    title: 'Vending Machine Problem',
     htmlAttrs: {
       lang: 'en'
     },
