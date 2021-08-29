@@ -52,12 +52,12 @@
             <b-button @click="exit" variant="danger">Exit</b-button>
             <div class="ale" v-if="change == null">
               <b-alert show variant="primary">
-                Total Coins : {{ total }} Bath</b-alert>
+                Total Coins : {{ total }} Baht</b-alert>
             </div>
 
             <div class="ale" v-if="change != null">
                 <b-alert show variant="danger">
-                 Change Money : {{ change }} Bath
+                 Change Money : {{ change }} Baht
                 </b-alert>
                 <p>Auto reload 5 Second</p>
             </div>
