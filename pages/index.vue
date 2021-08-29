@@ -56,10 +56,35 @@
             </div>
 
             <div class="ale" v-if="change != null">
+              <div v-if="change == 0">
                 <b-alert show variant="danger">
-                 Change Money : {{ change }} Baht
+                 no change
                 </b-alert>
-                <p>Auto reload 5 Second</p>
+              </div>
+              <div v-else>
+                  <b-alert show variant="danger">
+                    <h5> Change Money : {{ change }} Baht </h5>
+                      
+                      <div class="text-center">
+                        <b-button variant="danger">
+                          Coins 10 : <b-badge variant="light">{{ coins10 }} เหรียญ</b-badge>
+                        </b-button>
+                        <b-button variant="danger">
+                          Coins 5 : <b-badge variant="light">{{ coins5 }} เหรียญ</b-badge>
+                        </b-button>
+                        <b-button variant="danger">
+                          Coins 2 : <b-badge variant="light">{{ coins2 }} เหรียญ</b-badge>
+                        </b-button>
+                        <b-button variant="danger">
+                          Coins 1 : <b-badge variant="light">{{ coins1 }} เหรียญ</b-badge>
+                        </b-button>
+                      </div>                   
+                    
+                  </b-alert>
+                
+                  
+                </div>
+                <p>Auto reload 8 second</p>
             </div>
           </div>
         </b-col>
@@ -111,6 +136,10 @@ export default {
       change: null,
       sale: false,
       time: 5,
+      coins10: 0,
+      coins5: 0,
+      coins2: 0,
+      coins1: 0,
     };
   },
   methods: {
@@ -128,9 +157,10 @@ export default {
       this.total = 0;
       this.change = number2 - number1;
       window.scrollTo(0, 0);
+      this.num2coins(this.change);
       setTimeout(function(){ 
-        location.reload(); 
-      }, 5000);
+         location.reload(); 
+       },8000);
       
     },
     selectproduct() {
@@ -140,6 +170,21 @@ export default {
         this.sale = false;
         this.change = null;
         this.total = 0;
+    },
+    num2coins(number){
+      let ten = (number-(number%10))/10
+      let five = ((number%10)-(number%10)%5)/5
+      let one = ((number % 5)%2)
+      let two = two = ((number-((ten*10)+(five*5))) - one)/2
+        console.log('Ten : '+ (ten)); 
+        this.coins10 = (ten);
+        console.log('five : '+(five)); 
+        this.coins5 = (five);
+        console.log('Two : '+(two));
+        this.coins2 = (two);
+        console.log('One : '+(one));
+        this.coins1 = (one);
+      console.log((ten*10)+(five*5)+(two*2)+one);
     },
     
   },
