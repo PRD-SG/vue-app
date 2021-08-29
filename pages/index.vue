@@ -111,7 +111,7 @@
                       ><b-card-text>ราคา {{ pro.price }} บาท </b-card-text>
                       <b-button
                         @click="select(pro.price, total)"
-                        variant="warning">Select</b-button>
+                        variant="warning">Selected</b-button>
                     </b-card>
                   </b-col>
                 </div>
