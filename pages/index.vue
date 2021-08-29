@@ -41,15 +41,23 @@
             
       <!-- insert coins -->
       <b-row align-h="center">
-        <b-col md="12"
-          ><h2>Insert coins</h2>
+        <b-col md="12">
+        <span v-if="re != false">
+          <h2>Insert coins</h2>
+        </span>
+        <span v-else>
+          <h2>Change coins</h2>
+        </span>
+          
           <div class="insert">
-            <b-button @click="append(1)" class="btn">Coins 1</b-button>
-            <b-button @click="append(2)" class="btn">Coins 2</b-button>
-            <b-button @click="append(5)" class="btn">Coins 5</b-button>
-            <b-button @click="append(10)" class="btn">Coins 10</b-button>
-            <b-button @click="clear" variant="warning">Clear</b-button>
-            <b-button @click="exit" variant="danger">Exit</b-button>
+            <span v-if="re != false">
+              <b-button @click="append(1)" class="btn">Coins 1</b-button>
+              <b-button @click="append(2)" class="btn">Coins 2</b-button>
+              <b-button @click="append(5)" class="btn">Coins 5</b-button>
+              <b-button @click="append(10)" class="btn">Coins 10</b-button>
+              <b-button @click="clear" variant="warning">Clear</b-button>
+              <b-button @click="exit" variant="danger">Exit</b-button>
+            </span>
             <div class="ale" v-if="change == null">
               <b-alert show variant="primary">
                 Total Coins : {{ total }} Baht</b-alert>
@@ -63,8 +71,8 @@
               </div>
               <div v-else>
                   <b-alert show variant="danger">
-                    <h5> Change Money : {{ change }} Baht </h5>
-                      
+                    <p> Insert Coins : {{ totals}} Baht </p>
+                    <p> Change Coins : {{ change }} Baht  </p>
                       <div class="text-center">
                         <b-button variant="danger">
                           Coins 10 : <b-badge variant="light">{{ coins10 }} เหรียญ</b-badge>
@@ -79,12 +87,13 @@
                           Coins 1 : <b-badge variant="light">{{ coins1 }} เหรียญ</b-badge>
                         </b-button>
                       </div>                   
-                    
                   </b-alert>
-                
-                  
+              
                 </div>
-                <p>Auto reload 8 second</p>
+               
+               <b-alert show variant="warning">
+                 Auto reload page in 8 seconds
+               </b-alert>
             </div>
           </div>
         </b-col>
@@ -110,7 +119,7 @@
                       img-height="200"
                       ><b-card-text>ราคา {{ pro.price }} บาท </b-card-text>
                       <b-button
-                        @click="select(pro.price, total)"
+                        @click="select(pro.price, total, pro.id)"
                         variant="warning">Selected</b-button>
                     </b-card>
                   </b-col>
@@ -133,6 +142,8 @@ export default {
   data() {
     return {
       total: 0,
+      totals:0,
+      re: true,
       change: null,
       sale: false,
       time: 5,
@@ -150,17 +161,20 @@ export default {
     append(number) {
       this.total = this.total + number;
     },
-    select(number1, number2) {
+    select(number1, number2, id) {
       console.log("price : " + number1);
       console.log("total : " + number2);
       console.log("chang : " + (number2 - number1));
+      console.log('id product :'+id);
+      this.totals = number2
       this.total = 0;
       this.change = number2 - number1;
       window.scrollTo(0, 0);
       this.num2coins(this.change);
-      setTimeout(function(){ 
-         location.reload(); 
+          setTimeout(function(){ 
+              location.reload(); 
        },8000);
+      this.re = false;
       
     },
     selectproduct() {
