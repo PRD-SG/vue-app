@@ -43,10 +43,10 @@
       <b-row align-h="center">
         <b-col md="12">
         <span v-if="re != false">
-          <h2>Insert coins</h2>
+          <h2>{{message}}</h2>
         </span>
         <span v-else>
-          <h2>Change coins</h2>
+          <h2>{{message}}</h2>
         </span>
           
           <div class="insert">
@@ -151,6 +151,7 @@ export default {
       coins5: 0,
       coins2: 0,
       coins1: 0,
+      message: 'Insert coins',
     };
   },
   methods: {
@@ -171,11 +172,11 @@ export default {
       this.change = number2 - number1;
       window.scrollTo(0, 0);
       this.num2coins(this.change);
-          setTimeout(function(){ 
-              location.reload(); 
+      setTimeout(function(){ 
+        location.reload(); 
        },8000);
       this.re = false;
-      
+      this.message = 'Change coins';
     },
     selectproduct() {
         this.sale = true;
